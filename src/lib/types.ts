@@ -1,4 +1,4 @@
-import { DiaryEntry, DiaryEntryFile, Prisma } from "@/generated/prisma";
+import { Prisma } from "../../generated/prisma";
 
 export type AuthActionState = {
     success?: boolean;

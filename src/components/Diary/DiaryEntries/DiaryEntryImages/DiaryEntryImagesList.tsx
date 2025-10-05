@@ -1,6 +1,6 @@
 import { Status } from "@/lib/types";
 import { deleteEntryImage } from "@/server/diary";
-import { DiaryEntryFile } from "@/generated/prisma";
+import { DiaryEntryFile } from "../../../../../generated/prisma";
 import { X } from "lucide-react";
 import Image from "next/image";
 

@@ -1,4 +1,4 @@
-import { Diary } from "@/generated/prisma";
+import { Diary } from "../../../../generated/prisma";
 import { Button } from "@/components/ui/button";
 import { BookHeartIcon, ArrowRightIcon } from "lucide-react";
 import DeleteItemButton from "@/components/Diary/DiaryList/DeleteItemButton";

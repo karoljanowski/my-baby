@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { DiaryEntryFile } from "@/generated/prisma";
+import { DiaryEntryFile } from "../../../../../generated/prisma";
 import { saveEntryImages } from "@/server/diary";
 import { Status } from "@/lib/types";
 import DiaryEntryImagesInput from "@/components/Diary/DiaryEntries/DiaryEntryImages/DiaryEntryImagesInput";

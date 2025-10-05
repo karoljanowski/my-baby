@@ -1,10 +1,7 @@
 'use server';
 
 import { prisma } from "@/lib/prisma";
-import { del } from '@vercel/blob';
 import { deleteImageFromBlob, uploadImageToBlob } from "./images";
-import { DiaryEntry as TDiaryEntry } from "@/generated/prisma";
-import { EntryDataWithFiles } from "@/lib/types";
 
 export const getDiaryById = async (id: string) => {
     const diary = await prisma.diary.findUnique({

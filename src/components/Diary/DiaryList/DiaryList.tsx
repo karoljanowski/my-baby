@@ -1,7 +1,7 @@
 import { getDiariesByUserId } from "@/server/diaryList";
 import DiaryListItem from "@/components/Diary/DiaryList/DiaryListItem";
 import CreateDiaryButton from "@/components/Diary/DiaryList/CreateDiaryButton";
-import { Diary } from "@/generated/prisma";
+import { Diary } from "../../../../generated/prisma";
 
 const DiaryList = async ({ userId }: { userId: string }) => {
     const diaries = await getDiariesByUserId(userId);
