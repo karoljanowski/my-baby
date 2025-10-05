@@ -1,6 +1,6 @@
 'use server';
 
-import prisma from "@/lib/prisma";
+import { prisma } from "@/lib/prisma";
 import { createSession, verifySession } from "./session";
 import bcrypt from "bcrypt";
 import type { AuthActionState } from "@/lib/types";

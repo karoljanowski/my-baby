@@ -1,6 +1,6 @@
 'use server';
 
-import prisma from "@/lib/prisma";
+import { prisma } from "@/lib/prisma";
 import { del } from '@vercel/blob';
 import { deleteImageFromBlob, uploadImageToBlob } from "./images";
 import { DiaryEntry as TDiaryEntry } from "@/generated/prisma";
