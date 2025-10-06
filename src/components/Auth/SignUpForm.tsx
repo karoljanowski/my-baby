@@ -42,7 +42,7 @@ const SignUpForm = () => {
                 {state?.errors?.confirmPassword && <p className="text-red-500 text-sm">{state.errors.confirmPassword}</p>}
             </div>
             <div className="flex flex-col gap-4 w-full mt-2">
-                <Button type="submit" className="w-3/4" disabled={isPending}>Zarejestruj się</Button>
+                <Button type="submit" className="w-full md:w-3/4" disabled={isPending}>Zarejestruj się</Button>
                 <Link href="/logowanie">Masz już konto? <span className="text-secondary font-semibold">Zaloguj się!</span></Link>
             </div>
         </form>

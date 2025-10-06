@@ -13,11 +13,11 @@ const DiaryNavItem = ({ category, isSelected, onClick }: DiaryNavItemProps) => {
         <button 
             onClick={onClick}
             className={cn(
-                "flex flex-col items-start bg-white p-8 rounded-lg border border-white transition-all text-left",
+                "flex flex-col items-start bg-white p-6 lg:p-8 rounded-lg border border-white transition-all text-left h-full",
                 isSelected && "border-secondary"
             )}
         >
-            <div className="flex items-center gap-4 mb-6">
+            <div className="flex flex-col lg:flex-row md:items-center gap-4 mb-6">
                 <Image src={`/custom_icons/${category.category_icon}`} alt={category.category_title} width={32} height={32} className="h-8 w-8 object-contain" />
                 <div className="text-2xl">
                     {category.category_title.split(" ")[0]}{" "}

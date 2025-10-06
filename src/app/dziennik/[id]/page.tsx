@@ -17,7 +17,7 @@ const DiaryListPage = async ({ params }: { params: Promise<{ id: string }> }) =>
 
     return (
         <div className="bg-light-grey">
-            <div className="container mx-auto py-12">
+            <div className="container mx-auto py-12 px-4">
 
                 <Button variant="ghost" size="ghost" asChild className="mb-8">
                     <Link href="/dziennik">

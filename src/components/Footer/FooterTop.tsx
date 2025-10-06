@@ -23,8 +23,8 @@ const FooterTop = () => {
         },
     ]
     return (
-        <div className="flex items-center justify-between mb-20">
-            <div className="flex items-center">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8 md:mb-20">
+            <div className="flex items-center mb-6 md:mb-0">
                 <Image src="/footer_logo.svg" alt="Logo" width={113} height={32} />
             </div>
             <FooterMenu />

@@ -13,7 +13,7 @@ const DiaryEntries = ({ selectedCategory, entries, diaryId }: DiaryEntriesProps)
     const questions = data.find((question) => question.category_key === selectedCategory)?.questions;
     
     return (
-        <div className="bg-white p-16 rounded-lg flex flex-col gap-16 h-fit">
+        <div className="bg-white px-5 py-8 lg:p-16 rounded-lg flex flex-col gap-16 h-fit">
             {questions?.map((question) => {
                 return (
                     <DiaryEntry 

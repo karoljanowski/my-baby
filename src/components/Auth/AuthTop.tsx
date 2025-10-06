@@ -15,7 +15,7 @@ const AuthTop = ({ title, description }: AuthTopProps) => {
                     <ArrowLeftIcon strokeWidth={1} className="size-6" /> Powrót
                 </Link>
             </Button>
-            <h1 className="text-[40px] leading-[150%] mb-3">{title}</h1>
+            <h1 className="text-[36px] md:text-[40px] leading-[150%] mb-3 text-dark">{title}</h1>
             <p className="text-[16px] leading-[150%] font-light">{description}</p>
         </div>
     );

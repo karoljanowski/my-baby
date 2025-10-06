@@ -1,20 +1,36 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+:root {
+  --color-body: #555048;
+  --color-dark: #262626;
+  --color-green: #7A8665;
+  --color-brown: #6B4F4B;
+  --color-warm-white: #F8F3E7;
+  --color-beige: #E6D5B8;
+  --color-orange: #C47F5E;
+}
+
 @theme inline {
   --color-background: oklch(1 0 0);
-  --color-foreground: oklch(0.145 0 0);
+  --color-foreground: var(--color-body);
   --color-card: oklch(1 0 0);
   --color-card-foreground: oklch(0.145 0 0);
   --color-popover: oklch(1 0 0);
   --color-popover-foreground: oklch(0.145 0 0);
-  --color-primary: #6B4F4B;
-  --color-primary-foreground: #F8F3E7;
-  --color-secondary: #C47F5E;
-  --color-secondary-foreground: #F8F3E7;
+  --color-primary: var(--color-brown);
+  --color-primary-foreground: var(--color-warm-white);
+  --color-secondary: var(--color-orange);
+  --color-secondary-foreground: var(--color-warm-white);
 
+  --color-body: var(--color-body);
+  --color-dark: var(--color-dark);
+  --color-green: var(--color-green);
+  --color-brown: var(--color-brown);
+  --color-warm-white: var(--color-warm-white);
+  --color-beige: var(--color-beige);
+  --color-orange: var(--color-orange);
   --color-light-grey: #F4F4F4;
-  --color-green: #7A8665;
 
   --color-muted: oklch(0.97 0 0);
   --color-muted-foreground: #7D7D7D;
@@ -57,4 +73,33 @@
 
 .grid-auto-rows-1 {
   grid-auto-rows: 1fr;
+}
+
+.grid-one-row-one-column {
+  grid-row-start: 1;
+  grid-row-end: 1;
+  grid-column-start: 1;
+  grid-column-end: 1;
+}
+
+@keyframes scroll-text {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll-text {
+  animation: scroll-text 10s linear infinite;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

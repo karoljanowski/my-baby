@@ -35,7 +35,7 @@ const SignInForm = () => {
                 <Link className="text-sm self-end hover:underline" href="/odzyskiwanie-hasla">Nie pamiętasz hasła?</Link>
             </div>
             <div className="flex flex-col gap-4 w-full mt-2">
-                <Button type="submit" className="w-3/4" disabled={isPending}>Zaloguj się</Button>
+                <Button type="submit" className="w-full md:w-3/4" disabled={isPending}>Zaloguj się</Button>
                 <Link href="/rejestracja">Nie masz jeszcze konta? <span className="text-secondary font-semibold">Zarejestruj się!</span></Link>
             </div>
         </form>

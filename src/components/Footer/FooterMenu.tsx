@@ -21,7 +21,7 @@ const FooterMenu = () => {
         },
     ]
     return (
-        <div className="flex items-center gap-8">
+        <div className="flex flex-col md:flex-row md:items-center gap-3 md:gap-8 mb-6 md:mb-0">
             {footerLinks.map((link) => (
                 <Link href={link.href} key={link.title}>
                     {link.title}

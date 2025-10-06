@@ -1,9 +1,9 @@
 import Image from "next/image";
 const AuthContainer = ({children, image}: {children: React.ReactNode, image: string}) => {
     return (
-        <div className="container mx-auto">
-            <div className="grid grid-cols-[1fr_2fr]">
-                <div className="flex flex-col justify-center items-start">
+        <div className="container mx-auto px-4">
+            <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-8">
+                <div className="flex flex-col justify-center items-start pt-8">
                     {children}
                 </div>
                 <div className="flex flex-col justify-center items-center">
