@@ -12,7 +12,7 @@ const DiaryTop = ({ title, description, badgeText }: DiaryTopProps) => {
             <Badge className="mb-4">
                 {badgeText}
             </Badge>
-            <h1 className="text-[36px] md:text-[40px] leading-[120%] mb-8 text-dark">{title}</h1>
+            <h1 className="text-[36px] md:text-[40px] leading-[120%] mb-8 text-dark -tracking-[0.06em]">{title}</h1>
             <p className="text-lg max-w-xl leading-[150%] font-light">{description}</p>
         </div>
     );

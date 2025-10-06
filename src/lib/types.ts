@@ -1,5 +1,6 @@
 import { Prisma } from "../../generated/prisma";
 
+// Auth
 export type AuthActionState = {
     success?: boolean;
     errors?: {
@@ -13,6 +14,7 @@ export type AuthActionState = {
     };
 } | null;
 
+// Diary form
 export type CreateDiaryActionState = {
     success?: boolean;
     error?: {
@@ -34,4 +36,13 @@ export enum Status {
     SAVING,
     SAVED,
     ERROR,
+}
+
+// Discover Diary component
+export type DiscoverDiaryList = {
+    id: number;
+    title: React.ReactNode;
+    description: string;
+    image: string;
+    alt: string;
 }

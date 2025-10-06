@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const HeaderIcons = () => {
     return (
-        <div className="flex gap-4 items-center order-2 ml-auto">
+        <div className="flex gap-4 items-center order-2 ml-auto md:ml-0">
             <Link href="/logowanie">
                 <User className="text-dark" />
             </Link>
