@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { BookHeartIcon, ArrowRightIcon } from "lucide-react";
 import DeleteItemButton from "@/components/Diary/DiaryList/DeleteItemButton";
 import Link from "next/link";
+import GeneratePdfButton from "@/components/Diary/DiaryList/GeneratePdfButton";
 
 const DiaryListItem = ({ diary }: { diary: Diary }) => {
     return (
@@ -14,6 +15,7 @@ const DiaryListItem = ({ diary }: { diary: Diary }) => {
                     <div className="text-sm text-muted-foreground">Utworzono: {diary.createdAt.toLocaleDateString()}</div>
                 </div>
                 <div className="ml-auto flex items-center gap-2">
+                    <GeneratePdfButton id={diary.id} />
                     <DeleteItemButton id={diary.id} />
                     <Button variant="default" size="icon" asChild>
                         <Link href={`/dziennik/${diary.id}`}>
