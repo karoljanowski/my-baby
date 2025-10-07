@@ -46,3 +46,14 @@ export type DiscoverDiaryList = {
     image: string;
     alt: string;
 }
+
+// Send Mail
+export type SendMailActionState = {
+    success?: boolean;
+    errors?: {
+        general?: string;
+        name?: string;
+        email?: string;
+        message?: string;
+    }
+} | null;

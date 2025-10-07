@@ -23,7 +23,7 @@ const DiaryListItem = ({ diary }: { diary: Diary }) => {
             <div className="mt-auto flex items-center gap-2">
                 <Button variant="default" asChild className="flex-1">
                     <Link href={`/dziennik/${diary.id}`}>
-                        Otwórz dziennik
+                        Otwórz
                         <ArrowRightIcon className="w-5 h-5 ml-2" />
                     </Link>
                 </Button>
