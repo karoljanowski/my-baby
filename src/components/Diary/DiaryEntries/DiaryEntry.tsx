@@ -18,11 +18,10 @@ const DiaryEntry = ({ question, entry, diaryId }: DiaryEntryProps) => {
     const [text, setText] = useState(entry?.text ?? "");
     const [status, setStatus] = useState<Status>(Status.NO_CHANGES);
     const debouncedText = useDebounce(text, 1000);
-    const isFirstRender = useRef(true);
+    const hasUserEditedRef = useRef(false);
 
     useEffect(() => {
-        if (isFirstRender.current) {
-            isFirstRender.current = false;
+        if (!hasUserEditedRef.current) {
             return;
         }
 
@@ -36,10 +35,11 @@ const DiaryEntry = ({ question, entry, diaryId }: DiaryEntryProps) => {
             }
         }
         save();
-    }, [debouncedText, diaryId, question.question_key, entry?.text]);
+    }, [debouncedText, diaryId, question.question_key]);
 
     const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         setText(e.target.value);
+        hasUserEditedRef.current = true;
     }
 
     const handleChangeStatus = (status: Status) => {

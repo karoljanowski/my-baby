@@ -4,10 +4,10 @@ import { DiaryEntryFile } from "../../../../../generated/prisma";
 import { X } from "lucide-react";
 import Image from "next/image";
 
-const DiaryEntryImagesList = ({ images, setImages, setStatus }: { images: DiaryEntryFile[], setImages: (images: DiaryEntryFile[]) => void, setStatus: (status: Status) => void }) => {
+const DiaryEntryImagesList = ({ images, setImages, setStatus, diaryId }: { images: DiaryEntryFile[], setImages: (images: DiaryEntryFile[]) => void, setStatus: (status: Status) => void, diaryId: string }) => {
     const handleDelete = async (id: string) => {
         setStatus(Status.SAVING);
-        const result = await deleteEntryImage(id);
+        const result = await deleteEntryImage(id, diaryId);
         if (result.success) {
             setImages(images.filter((image) => image.id !== id));
             setStatus(Status.SAVED);

@@ -40,7 +40,7 @@ const DiaryEntryImages = ({ initialImages, entryKey, diaryId, setStatus }: Diary
     }
     return (
         <div className="flex items-center gap-4 mb-3">
-            {images.length > 0 && <DiaryEntryImagesList images={images} setImages={setImages} setStatus={setStatus} />}
+            {images.length > 0 && <DiaryEntryImagesList images={images} setImages={setImages} setStatus={setStatus} diaryId={diaryId} />}
             <DiaryEntryImagesInput hasImages={images.length > 0} entryKey={entryKey} handleChange={handleChange} />
         </div>
     );
