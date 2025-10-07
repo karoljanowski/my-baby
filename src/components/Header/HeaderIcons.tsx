@@ -7,7 +7,7 @@ const HeaderIcons = () => {
             <Link href="/logowanie">
                 <User className="text-dark" />
             </Link>
-            <Link href="https://www.instagram.com/baby.pielgrzymka/" target="_blank">
+            <Link href="https://www.instagram.com/" target="_blank">
                 <Instagram className="text-dark" />
             </Link>
         </div>

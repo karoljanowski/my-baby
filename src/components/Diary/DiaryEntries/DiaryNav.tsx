@@ -31,7 +31,7 @@ const DiaryNav = ({ categories, selectedCategory, onCategoryChange }: DiaryNavPr
                 className="flex gap-4 lg:flex-col lg:gap-8 overflow-x-auto snap-x snap-mandatory scrollbar-hide lg:overflow-visible lg:snap-none mb-8 lg:mb-0"
             >
                 {categories.map((category) => (
-                    <div key={category.category_key} className="snap-center shrink-0 w-[85%] lg:w-auto lg:shrink">
+                    <div key={category.category_key} className="snap-start shrink-0 w-[85%] md:w-[45%] lg:w-auto lg:shrink">
                         <DiaryNavItem 
                             category={category}
                             isSelected={selectedCategory === category.category_key}

@@ -26,10 +26,13 @@ const CreateDiaryButton = ({ userId }: { userId: string }) => {
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
-                <div className="group bg-white/80 border border-dashed border-transparent hover:border-secondary transition-all rounded-lg p-4 cursor-pointer">
-                    <div className="flex items-center justify-center gap-2 h-full">
-                        <PlusIcon className="size-6 text-foreground/50 group-hover:text-secondary transition-colors" />
-                        <div className="text-lg font-medium text-foreground/50 group-hover:text-secondary transition-colors">Utwórz nowy dziennik</div>
+                <div className="group bg-white border border-dashed border-white hover:border-secondary transition-all rounded-lg p-6 lg:p-8 cursor-pointer flex flex-col items-center justify-center h-full min-h-[200px]">
+                    <PlusIcon className="w-12 h-12 text-secondary/50 group-hover:text-secondary transition-colors mb-4" />
+                    <div className="text-2xl text-center">
+                        Utwórz{" "}
+                        <span className="text-green/50 group-hover:text-green font-secondary transition-colors">
+                            nowy dziennik
+                        </span>
                     </div>
                 </div>
             </DialogTrigger>

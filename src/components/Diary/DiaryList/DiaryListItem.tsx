@@ -7,22 +7,28 @@ import GeneratePdfButton from "@/components/Diary/DiaryList/GeneratePdfButton";
 
 const DiaryListItem = ({ diary }: { diary: Diary }) => {
     return (
-        <div className="bg-white border border-transparent hover:border-secondary transition-all rounded-lg p-4">
-            <div className="flex items-center gap-2">
-                <BookHeartIcon width={40} height={40} className="text-secondary" />
-                <div className="flex flex-col">
-                    <div className="text-xl font-medium">{diary.name}</div>
-                    <div className="text-sm text-muted-foreground">Utworzono: {diary.createdAt.toLocaleDateString()}</div>
+        <div className="bg-white border border-white hover:border-secondary transition-all rounded-lg p-6 lg:p-8 flex flex-col h-full">
+            <div className="flex items-center gap-4 mb-6">
+                <BookHeartIcon className="w-8 h-8 text-secondary shrink-0" />
+                <div className="text-2xl">
+                    Dziennik{" "}
+                    <span className="text-green font-secondary">
+                        {diary.name}
+                    </span>
                 </div>
-                <div className="ml-auto flex items-center gap-2">
-                    <GeneratePdfButton id={diary.id} />
-                    <DeleteItemButton id={diary.id} />
-                    <Button variant="default" size="icon" asChild>
-                        <Link href={`/dziennik/${diary.id}`}>
-                            <ArrowRightIcon width={24} height={24} />
-                        </Link>
-                    </Button>
-                </div>
+            </div>
+            <div className="leading-[150%] font-light mb-8">
+                Utworzono: {diary.createdAt.toLocaleDateString()}
+            </div>
+            <div className="mt-auto flex items-center gap-2">
+                <Button variant="default" asChild className="flex-1">
+                    <Link href={`/dziennik/${diary.id}`}>
+                        Otwórz dziennik
+                        <ArrowRightIcon className="w-5 h-5 ml-2" />
+                    </Link>
+                </Button>
+                <GeneratePdfButton id={diary.id} />
+                <DeleteItemButton id={diary.id} />
             </div>
         </div>
     );

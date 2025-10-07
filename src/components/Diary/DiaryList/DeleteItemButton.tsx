@@ -30,8 +30,13 @@ const DeleteItemButton = ({ id }: { id: string }) => {
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
-                <Button variant="outline" size="icon" className="border-red-500 text-red-500 hover:bg-red-500 hover:text-white cursor-pointer">
-                    <Trash2Icon />
+                <Button 
+                    variant="outline" 
+                    size="icon" 
+                    className="border-red-500/20 hover:border-red-500 hover:bg-red-500/5 transition-all cursor-pointer"
+                    title="Usuń dziennik"
+                >
+                    <Trash2Icon className="w-5 h-5 text-red-500" />
                 </Button>
             </DialogTrigger>
             <DialogContent>

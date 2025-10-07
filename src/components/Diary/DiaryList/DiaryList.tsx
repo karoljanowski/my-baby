@@ -7,11 +7,9 @@ const DiaryList = async ({ userId }: { userId: string }) => {
     const diaries = await getDiariesByUserId(userId);
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 grid-auto-rows-1">
+        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8 auto-rows-fr">
             {diaries.map((diary: Diary) => (
-                <div key={diary.id}>
-                    <DiaryListItem diary={diary} />
-                </div>
+                <DiaryListItem key={diary.id} diary={diary} />
             ))}
             <CreateDiaryButton userId={userId} />
         </div>
