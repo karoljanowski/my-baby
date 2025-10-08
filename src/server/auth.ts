@@ -4,6 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { createSession, verifySession } from "./session";
 import bcrypt from "bcrypt";
 import type { AuthActionState } from "@/lib/types";
+import { cache } from "react";
 
 const signIn = async (prevState: AuthActionState, formData: FormData) => {
     const email = formData.get("email") as string;
@@ -118,19 +119,4 @@ const signUp = async (prevState: AuthActionState, formData: FormData) => {
     return { success: true };
 }
 
-const getUser = async () => {
-    const { userId } = await verifySession();
-
-    if (!userId || typeof userId !== 'string') {
-        return null;
-    }
-
-    const user = await prisma.user.findUnique({
-        where: { id: userId },
-    });
-    return user;
-}
-
-
-
-export { signIn, signUp, getUser };
+export { signIn, signUp };

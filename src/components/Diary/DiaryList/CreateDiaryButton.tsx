@@ -10,7 +10,7 @@ import { createDiary } from "@/server/diaryList";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
-const CreateDiaryButton = ({ userId }: { userId: string }) => {
+const CreateDiaryButton = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [state, formAction, isPending] = useActionState(createDiary, null);
     const router = useRouter();
@@ -46,7 +46,6 @@ const CreateDiaryButton = ({ userId }: { userId: string }) => {
 
                 <form action={formAction}>
                     <div className="flex flex-col gap-2 w-full">
-                        <input type="hidden" name="userId" value={userId} />
                         <Label htmlFor="name">Nazwa dziennika</Label>
                         <Input id="name" name="name" placeholder="Nazwa dziennika" defaultValue={state?.formData?.name} />
                         {state?.error && <p className="text-red-500 text-sm">{state.error.message}</p>}

@@ -2,9 +2,9 @@ import { NextRequest, NextResponse } from "next/server"
 import { verifySession } from "@/server/session";
 
 const middleware = async (request: NextRequest) => {
-    const session = await verifySession();
+    const userId = await verifySession();
 
-    if (!session.userId) {
+    if (!userId) {
         return NextResponse.redirect(new URL('/logowanie', request.url));
     }
     

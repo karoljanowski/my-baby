@@ -46,7 +46,7 @@ const GeneratePdfButton = ({ id }: { id: string }) => {
             size="icon" 
             onClick={handleDownload}
             disabled={isLoading}
-            className="border-green/20 hover:border-green hover:bg-green/5 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            className="border-green/20 hover:border-green hover:bg-green/5 transition-all disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
             title="Pobierz PDF"
         >
             {isLoading ? (

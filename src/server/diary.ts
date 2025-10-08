@@ -3,10 +3,17 @@
 import { prisma } from "@/lib/prisma";
 import { deleteImageFromBlob, uploadImageToBlob } from "./images";
 import { revalidatePath } from "next/cache";
+import { verifySession } from "./session";
 
 export const getDiaryById = async (id: string) => {
+    const userId = await verifySession();
+
+    if (!userId) {
+        return { diary: null, error: { message: "Błąd! Musisz być zalogowany!" } };
+    }
+
     const diary = await prisma.diary.findUnique({
-        where: { id },
+        where: { id, userId },
         include: {
             entries: {
                 include: {
@@ -15,14 +22,21 @@ export const getDiaryById = async (id: string) => {
             },
         },
     });
-    return diary;
+
+    return { diary, error: null };
 };
 
 export const saveEntry = async (data: { text: string, diaryId: string, entryKey: string }) => {
+    const userId = await verifySession();
+
+    if (!userId) {
+        return { error: true };
+    }
+
     const { text, diaryId, entryKey } = data;
 
     if (!diaryId || !entryKey) {
-        return { error: { message: "Błąd podczas zapisywania wpisów" } };
+        return { error: true };
     }
 
     try {
@@ -36,15 +50,21 @@ export const saveEntry = async (data: { text: string, diaryId: string, entryKey:
         
         return { success: true };
     } catch (error) {
-        return { error: { message: "Błąd podczas zapisywania wpisów" } };
+        return { error: true };
     }
 };
 
 export const saveEntryImages = async (data: { images: File[], diaryId: string, entryKey: string }) => {
+    const userId = await verifySession();
+
+    if (!userId) {
+        return { error: true };
+    }
+
     const { images, diaryId, entryKey } = data;
 
     if (!diaryId || !entryKey || !images) {
-        return { error: { message: "Błąd podczas zapisywania zdjęć" } };
+        return { error: true };
     }
 
     try {
@@ -53,7 +73,7 @@ export const saveEntryImages = async (data: { images: File[], diaryId: string, e
         });
 
         if (!diaryEntry) {
-            return { error: { message: "Błąd podczas zapisywania zdjęć" } };
+            return { error: true };
         }
 
         const imagesUrls = await Promise.all(images.map(async (image) => {
@@ -68,13 +88,19 @@ export const saveEntryImages = async (data: { images: File[], diaryId: string, e
 
         return { success: true };
     } catch (error) {
-        return { error: { message: "Błąd podczas zapisywania zdjęć" } };
+        return { error: true };
     }
 }
 
 export const deleteEntryImage = async (id: string, diaryId: string) => {
+    const userId = await verifySession();
+
+    if (!userId) {
+        return { error: true };
+    }
+
     if (!id) {
-        return { error: { message: "Błąd podczas usuwania zdjęcia" } };
+        return { error: true };
     }
 
     try {
@@ -87,6 +113,6 @@ export const deleteEntryImage = async (id: string, diaryId: string) => {
 
         return { success: true };
     } catch (error) {
-        return { error: { message: "Błąd podczas usuwania zdjęcia" } };
+        return { error: true };
     }
 }

@@ -1,9 +1,14 @@
+import { verifySession } from "@/server/session";
 import { NextRequest, NextResponse } from "next/server";
 import { PDFDocument, StandardFonts } from "pdf-lib";
-import { prisma } from "@/lib/prisma";
 
 export async function GET(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
-    console.log("Generating PDF");
+    const userId = await verifySession();
+
+    if (!userId) {
+        return new NextResponse("Unauthorized", { status: 401 });
+    }
+
     const { id } = await params;
 
     const pdfDoc = await PDFDocument.create();

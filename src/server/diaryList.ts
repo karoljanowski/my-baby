@@ -2,28 +2,35 @@
 
 import {prisma} from "@/lib/prisma";
 import type { CreateDiaryActionState } from "@/lib/types";
+import { verifySession } from "./session";
 
-export const getDiariesByUserId = async (userId: string) => {
+export const getDiariesByUserId = async () => {
+    const userId = await verifySession();
+
+    if (!userId) {
+        return { diaries: [], error: { message: "Błąd! Musisz być zalogowany!" } };
+    }
+
     const diaries = await prisma.diary.findMany({
         where: {
-            userId,
+            userId: userId,
         },
     });
 
-    return diaries;
+    return { diaries, error: null };
 };
 
 export const createDiary = async (prevState: CreateDiaryActionState, formData: FormData): Promise<CreateDiaryActionState> => {
+    const userId = await verifySession();
+
+    if (!userId) {
+        return { success: false, error: { message: "Błąd! Musisz być zalogowany!" }, formData: { name: formData.get("name") as string } };
+    }
+
     const name = formData.get("name") as string;
     
     if (!name) {
         return { success: false, error: { message: "Nazwa dziennika jest wymagana" }, formData: { name } };
-    }
-
-    const userId = formData.get("userId");
-
-    if (!userId || typeof userId !== 'string') {
-        return { error: { message: "Wystąpił błąd podczas tworzenia nowego dziennika" }, formData: { name } };
     }
 
     try {        
@@ -41,13 +48,19 @@ export const createDiary = async (prevState: CreateDiaryActionState, formData: F
 };
 
 export const deleteDiary = async (id: string) => {
+    const userId = await verifySession();
+
+    if (!userId) {
+        return { error: { message: "Błąd! Musisz być zalogowany!" } };
+    }
+
     if (!id) {
         return { error: { message: "Wystąpił błąd podczas usuwania dziennika" } };
     }
 
     try {
         await prisma.diary.delete({
-            where: { id },
+            where: { id, userId },
         });
         return { success: true };
     } catch (error) {

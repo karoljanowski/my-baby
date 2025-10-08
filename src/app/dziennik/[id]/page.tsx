@@ -4,15 +4,19 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ArrowLeftIcon } from "lucide-react";
 import DiaryContainer from "@/components/Diary/DiaryEntries/DiaryContainer";
+import DiaryError from "@/components/Diary/DiaryEntries/DiaryError";
 
-const DiaryListPage = async ({ params }: { params: Promise<{ id: string }> }) => {
+const DiaryPage = async ({ params }: { params: Promise<{ id: string }> }) => {
     const { id } = await params;
-    const diary = await getDiaryById(id);
+    const diaryResult = await getDiaryById(id);
 
 
-    if (!diary) {
-        // TODO: ZROBIĆ TUTAJ JAKIS ERROR HANDLING
-        return;
+    if (diaryResult.error) {
+        return <DiaryError message={diaryResult.error.message} />;
+    }
+
+    if (!diaryResult.diary) {
+        return <DiaryError message="Dziennik nie został znaleziony" />;
     }
 
     return (
@@ -28,14 +32,14 @@ const DiaryListPage = async ({ params }: { params: Promise<{ id: string }> }) =>
                 <DiaryTop 
                 title={<>Uzupełnij <span className="text-secondary font-secondary">dziennik</span> dla Twojego dziecka</>} 
                 description="Zachowaj najpiękniejsze wspomnienia – zapisuj ważne chwile i dodawaj zdjęcia, by stworzyć wyjątkową pamiątkę na lata." 
-                badgeText={diary.name}
+                badgeText={diaryResult.diary.name}
                 />
 
-                <DiaryContainer entries={diary.entries} diaryId={diary.id} />
+                <DiaryContainer entries={diaryResult.diary.entries} diaryId={diaryResult.diary.id} />
 
             </div>
         </div>
     );
 };
 
-export default DiaryListPage;
+export default DiaryPage;

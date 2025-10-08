@@ -2,8 +2,15 @@
 
 import { del, put } from '@vercel/blob';
 import { v4 as uuidv4 } from 'uuid';
+import { verifySession } from './session';
 
 export const uploadImageToBlob = async (file: File): Promise<string> => {
+    const userId = await verifySession();
+
+    if (!userId) {
+        throw new Error('Błąd! Musisz być zalogowany!');
+    }
+
     try {
         const blob = await put(uuidv4(), file, {
             access: 'public',
@@ -16,6 +23,12 @@ export const uploadImageToBlob = async (file: File): Promise<string> => {
 };
 
 export const deleteImageFromBlob = async (url: string) => {
+    const userId = await verifySession();
+
+    if (!userId) {
+        throw new Error('Błąd! Musisz być zalogowany!');
+    }
+
     try {
         await del(url);
     } catch (error) {
