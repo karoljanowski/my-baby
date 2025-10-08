@@ -25,7 +25,7 @@ const HeaderMenu = () => {
                     </Link>
                 ))}
             </div>
-            <MobileMenu />
+            <MobileMenu menuItems={menuItems} />
         </>
     );
 };
