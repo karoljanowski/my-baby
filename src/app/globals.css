@@ -97,10 +97,6 @@
   }
 }
 
-.animate-scroll-text {
-  animation: scroll-text 10s linear infinite;
-}
-
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
