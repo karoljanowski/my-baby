@@ -12,8 +12,8 @@ type BorderImageProps = {
 
 const BorderImage = ({ src, alt, width, height, className, containerClassName }: BorderImageProps) => {
     return (
-        <div className={cn("border-[10px] border-beige rounded-tl-[1000px] rounded-tr-[1000px] overflow-hidden flex items-center justify-center", containerClassName)}>
-            <Image src={src} alt={alt} width={width} height={height} className={cn("w-full h-full object-cover", className)} />
+        <div className={cn("overflow-hidden flex items-center justify-center", containerClassName)}>
+            <Image src={src} alt={alt} width={width} height={height} className={cn("w-full h-full object-cover border-[10px] border-beige rounded-tl-[1000px] rounded-tr-[1000px]", className)} />
         </div>
     );
 };

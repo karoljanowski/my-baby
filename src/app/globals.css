@@ -71,6 +71,12 @@
   }
 }
 
+@media (width >= 96rem) {
+  .container {
+      max-width: 80rem;
+  }
+}
+
 .grid-auto-rows-1 {
   grid-auto-rows: 1fr;
 }
