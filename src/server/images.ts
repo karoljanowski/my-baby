@@ -22,7 +22,7 @@ export const uploadImageToBlob = async (file: File): Promise<string> => {
     }
 };
 
-export const deleteImageFromBlob = async (url: string) => {
+export const deleteImagesFromBlob = async (url: string | string[]) => {
     const userId = await verifySession();
 
     if (!userId) {

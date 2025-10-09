@@ -1,5 +1,11 @@
 import DiaryTop from "@/components/Diary/DiaryTop";
 import DiaryList from "@/components/Diary/DiaryList/DiaryList";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Lista dzienników | My Baby",
+    description: "Zarządzaj swoimi dziennikami i twórz wyjątkowe pamiątki dla swojego dziecka.",
+};
 
 const DiaryListPage = async () => {
     return (

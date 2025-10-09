@@ -1,16 +1,29 @@
 import { Status } from "@/lib/types";
 import { deleteEntryImage } from "@/server/diary";
 import { DiaryEntryFile } from "../../../../../generated/prisma";
-import { X } from "lucide-react";
+import { Loader2, X } from "lucide-react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
-const DiaryEntryImagesList = ({ images, setImages, setStatus, diaryId }: { images: DiaryEntryFile[], setImages: (images: DiaryEntryFile[]) => void, setStatus: (status: Status) => void, diaryId: string }) => {
+type DiaryEntryImagesListProps = {
+    images: DiaryEntryFile[];
+    setImages: (images: DiaryEntryFile[]) => void;
+    uploadingCount: number;
+    setStatus: (status: Status) => void;
+    diaryId: string;
+    entryKey: string;
+}
+
+const DiaryEntryImagesList = ({ images, setImages, uploadingCount, setStatus, diaryId, entryKey }: DiaryEntryImagesListProps) => {
+    const router = useRouter();
+
     const handleDelete = async (id: string) => {
         setStatus(Status.SAVING);
-        const result = await deleteEntryImage(id, diaryId);
-        if (result.success) {
-            setImages(images.filter((image) => image.id !== id));
+        const result = await deleteEntryImage(id, diaryId, entryKey);
+        if (result.success && result.files) {
+            setImages(result.files);
             setStatus(Status.SAVED);
+            router.refresh();
         } else if (result.error) {
             setStatus(Status.ERROR);
         }
@@ -20,10 +33,15 @@ const DiaryEntryImagesList = ({ images, setImages, setStatus, diaryId }: { image
         <div className="flex flex-wrap gap-4">
             {images.map((image) => (
                 <div key={image.id} className="relative w-[64px] h-[64px] rounded-lg border border-input">
-                    <Image key={image.id} src={image.url} alt="Image" width={64} height={64} className="object-cover w-full h-full" />
+                    <Image key={image.id} src={image.url} alt="Image" width={64} height={64} className="object-cover w-full h-full rounded-lg" />
                     <div className="absolute bottom-0 -right-1/5 z-10 bg-white rounded-full p-1 border-input border cursor-pointer" onClick={() => handleDelete(image.id)}>
                         <X className="w-4 h-4" />
                     </div>
+                </div>
+            ))}
+            {Array.from({ length: uploadingCount }).map((_, index) => (
+                <div key={`loader-${index}`} className="w-[64px] h-[64px] rounded-lg border border-input flex items-center justify-center bg-gray-50">
+                    <Loader2 className="w-6 h-6 animate-spin text-secondary" />
                 </div>
             ))}
         </div>

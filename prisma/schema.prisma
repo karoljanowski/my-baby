@@ -44,7 +44,7 @@ model DiaryEntry {
   files     DiaryEntryFile[]
 
   diaryId String
-  diary   Diary @relation(fields: [diaryId], references: [id])
+  diary   Diary @relation(fields: [diaryId], references: [id], onDelete: Cascade)
 
   @@unique([diaryId, entryKey])
 }
@@ -54,5 +54,5 @@ model DiaryEntryFile {
   url       String
 
   diaryEntryId String
-  diaryEntry   DiaryEntry @relation(fields: [diaryEntryId], references: [id])
+  diaryEntry   DiaryEntry @relation(fields: [diaryEntryId], references: [id], onDelete: Cascade)
 }

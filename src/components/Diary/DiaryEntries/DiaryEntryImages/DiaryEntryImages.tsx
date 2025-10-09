@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { DiaryEntryFile } from "../../../../../generated/prisma";
 import { saveEntryImages } from "@/server/diary";
 import { Status } from "@/lib/types";
@@ -10,38 +11,56 @@ type DiaryEntryImagesProps = {
     entryKey: string,
     diaryId: string,
     setStatus: (status: Status) => void,
+    status: Status,
 }
 
-const DiaryEntryImages = ({ initialImages, entryKey, diaryId, setStatus }: DiaryEntryImagesProps) => {
+const DiaryEntryImages = ({ initialImages, entryKey, diaryId, setStatus, status }: DiaryEntryImagesProps) => {
+    const router = useRouter();
     const [images, setImages] = useState(initialImages);
+    const [uploadingCount, setUploadingCount] = useState(0);
+
+    useEffect(() => {
+        setImages(initialImages);
+    }, [initialImages]);
 
     const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const files = e.target.files;
         
         if (files) {
             const filesArray = Array.from(files);
-            const tempImages: DiaryEntryFile[] = filesArray.map((file, index) => ({
-                id: `temp-${Date.now()}-${index}`,
-                url: URL.createObjectURL(file),
-                diaryEntryId: ''
-            }));
             
-            setImages(prev => [...prev, ...tempImages]);
+            setUploadingCount(filesArray.length);
             setStatus(Status.SAVING);
             
             const result = await saveEntryImages({ images: filesArray, diaryId, entryKey });
             
-            if (result.success) {
+            if (result.success && result.files) {
+                setImages(result.files);
+                setUploadingCount(0);
                 setStatus(Status.SAVED);
+                router.refresh();
             } else if (result.error) {
                 setStatus(Status.ERROR);
+                setUploadingCount(0);
             }
+            
+            e.target.value = '';
         }
     }
+    
     return (
         <div className="flex items-center gap-4 mb-3">
-            {images.length > 0 && <DiaryEntryImagesList images={images} setImages={setImages} setStatus={setStatus} diaryId={diaryId} />}
-            <DiaryEntryImagesInput hasImages={images.length > 0} entryKey={entryKey} handleChange={handleChange} />
+            {(images.length > 0 || uploadingCount > 0) && (
+                <DiaryEntryImagesList 
+                    images={images}
+                    setImages={setImages}
+                    uploadingCount={uploadingCount}
+                    setStatus={setStatus} 
+                    diaryId={diaryId}
+                    entryKey={entryKey}
+                />
+            )}
+            <DiaryEntryImagesInput disabled={status === Status.SAVING} hasImages={images.length > 0 || uploadingCount > 0} entryKey={entryKey} handleChange={handleChange} />
         </div>
     );
 };

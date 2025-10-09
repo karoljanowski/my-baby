@@ -1,7 +1,7 @@
 'use server';
 
 import { prisma } from "@/lib/prisma";
-import { deleteImageFromBlob, uploadImageToBlob } from "./images";
+import { deleteImagesFromBlob, uploadImageToBlob } from "./images";
 import { revalidatePath } from "next/cache";
 import { verifySession } from "./session";
 
@@ -84,15 +84,19 @@ export const saveEntryImages = async (data: { images: File[], diaryId: string, e
             data: imagesUrls.map((url) => ({ url, diaryEntryId: diaryEntry.id })),
         });
 
+        const updatedFiles = await prisma.diaryEntryFile.findMany({
+            where: { diaryEntryId: diaryEntry.id },
+        });
+
         revalidatePath(`/dziennik/${diaryId}`);
 
-        return { success: true };
+        return { success: true, files: updatedFiles };
     } catch (error) {
         return { error: true };
     }
 }
 
-export const deleteEntryImage = async (id: string, diaryId: string) => {
+export const deleteEntryImage = async (id: string, diaryId: string, entryKey: string) => {
     const userId = await verifySession();
 
     if (!userId) {
@@ -104,14 +108,23 @@ export const deleteEntryImage = async (id: string, diaryId: string) => {
     }
 
     try {
-        await deleteImageFromBlob(id);
-        await prisma.diaryEntryFile.delete({
+        const deletedImage = await prisma.diaryEntryFile.delete({
             where: { id },
+            select: {
+                url: true,
+                diaryEntryId: true,
+            }
         });
+        
+        await deleteImagesFromBlob(deletedImage.url);
 
+        const updatedFiles = await prisma.diaryEntryFile.findMany({
+            where: { diaryEntryId: deletedImage.diaryEntryId },
+        });
+        
         revalidatePath(`/dziennik/${diaryId}`);
 
-        return { success: true };
+        return { success: true, files: updatedFiles };
     } catch (error) {
         return { error: true };
     }

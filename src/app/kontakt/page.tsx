@@ -2,6 +2,12 @@ import GeneralContainer from "@/components/GeneralContainer";
 import { Badge } from "@/components/ui/badge";
 import ContactForm from "@/components/Contact/ContactForm";
 import ContactDecorations from "@/components/Contact/ContactDecorations";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Kontakt | My Baby",
+    description: "Skontaktuj się z nami i dowiedz się więcej o naszym dzienniku.",
+};
 
 const ContactPage = () => {
     return (

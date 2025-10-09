@@ -3,6 +3,7 @@
 import {prisma} from "@/lib/prisma";
 import type { CreateDiaryActionState } from "@/lib/types";
 import { verifySession } from "./session";
+import { deleteImagesFromBlob } from "./images";
 
 export const getDiariesByUserId = async () => {
     const userId = await verifySession();
@@ -59,11 +60,39 @@ export const deleteDiary = async (id: string) => {
     }
 
     try {
-        await prisma.diary.delete({
+        const diary = await prisma.diary.findUnique({
             where: { id, userId },
+            include: {
+                entries: {
+                    include: {
+                        files: true
+                    }
+                }
+            }
         });
+
+        if (!diary) {
+            return { error: { message: "Dziennik nie został znaleziony" } };
+        }
+
+        const imageUrls: string[] = [];
+        for (const entry of diary.entries) {
+            for (const file of entry.files) {
+                imageUrls.push(file.url);
+            }
+        }
+
+        await prisma.diary.delete({
+            where: { id, userId }
+        });
+
+        if (imageUrls.length > 0) {
+            await deleteImagesFromBlob(imageUrls);
+        }
+
         return { success: true };
     } catch (error) {
+        console.error('Error deleting diary:', error);
         return { error: { message: "Wystąpił błąd podczas usuwania dziennika" } };
     }   
 };

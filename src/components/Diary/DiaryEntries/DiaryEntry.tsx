@@ -61,6 +61,7 @@ const DiaryEntry = ({ question, entry, diaryId }: DiaryEntryProps) => {
                 entryKey={question.question_key} 
                 diaryId={diaryId} 
                 setStatus={handleChangeStatus}
+                status={status}
             />
             <DiaryEntryStatusInfo status={status} />
         </div>

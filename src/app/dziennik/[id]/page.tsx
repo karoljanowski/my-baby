@@ -5,6 +5,12 @@ import Link from "next/link";
 import { ArrowLeftIcon } from "lucide-react";
 import DiaryContainer from "@/components/Diary/DiaryEntries/DiaryContainer";
 import DiaryError from "@/components/Diary/DiaryEntries/DiaryError";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Dziennik | My Baby",
+    description: "Zachowaj najpiękniejsze wspomnienia – zapisuj ważne chwile i dodawaj zdjęcia, by stworzyć wyjątkową pamiątkę na lata.",
+};
 
 const DiaryPage = async ({ params }: { params: Promise<{ id: string }> }) => {
     const { id } = await params;
