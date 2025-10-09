@@ -30,13 +30,13 @@ export const saveEntry = async (data: { text: string, diaryId: string, entryKey:
     const userId = await verifySession();
 
     if (!userId) {
-        return { error: true };
+        return { success: false, message: 'Musisz być zalogowany' };
     }
 
     const { text, diaryId, entryKey } = data;
 
     if (!diaryId || !entryKey) {
-        return { error: true };
+        return { success: false, message: 'Nieprawidłowe dane' };
     }
 
     try {
@@ -50,7 +50,7 @@ export const saveEntry = async (data: { text: string, diaryId: string, entryKey:
         
         return { success: true };
     } catch (error) {
-        return { error: true };
+        return { success: false, message: 'Błąd podczas zapisywania wpisu' };
     }
 };
 
@@ -58,13 +58,32 @@ export const saveEntryImages = async (data: { images: File[], diaryId: string, e
     const userId = await verifySession();
 
     if (!userId) {
-        return { error: true };
+        return { success: false, message: 'Musisz być zalogowany' };
     }
 
     const { images, diaryId, entryKey } = data;
 
     if (!diaryId || !entryKey || !images) {
-        return { error: true };
+        return { success: false, message: 'Nieprawidłowe dane' };
+    }
+
+    const MAX_FILE_SIZE = 4 * 1024 * 1024;
+    const MAX_TOTAL_SIZE = 10 * 1024 * 1024;
+
+    const oversizedFile = images.find(file => file.size > MAX_FILE_SIZE);
+    if (oversizedFile) {
+        return { 
+            success: false, 
+            message: `Maksymalny rozmiar pojedynczego pliku to 4MB.` 
+        };
+    }
+
+    const totalSize = images.reduce((sum, file) => sum + file.size, 0);
+    if (totalSize > MAX_TOTAL_SIZE) {
+        return { 
+            success: false, 
+            message: `Całkowity rozmiar plików przekracza limit 10MB.` 
+        };
     }
 
     try {
@@ -73,7 +92,7 @@ export const saveEntryImages = async (data: { images: File[], diaryId: string, e
         });
 
         if (!diaryEntry) {
-            return { error: true };
+            return { success: false, message: 'Wpis nie istnieje' };
         }
 
         const imagesUrls = await Promise.all(images.map(async (image) => {
@@ -92,7 +111,7 @@ export const saveEntryImages = async (data: { images: File[], diaryId: string, e
 
         return { success: true, files: updatedFiles };
     } catch (error) {
-        return { error: true };
+        return { success: false, message: 'Błąd podczas przesyłania zdjęć' };
     }
 }
 
@@ -100,11 +119,11 @@ export const deleteEntryImage = async (id: string, diaryId: string, entryKey: st
     const userId = await verifySession();
 
     if (!userId) {
-        return { error: true };
+        return { success: false, message: 'Musisz być zalogowany' };
     }
 
     if (!id) {
-        return { error: true };
+        return { success: false, message: 'Nieprawidłowe dane' };
     }
 
     try {
@@ -126,6 +145,6 @@ export const deleteEntryImage = async (id: string, diaryId: string, entryKey: st
 
         return { success: true, files: updatedFiles };
     } catch (error) {
-        return { error: true };
+        return { success: false, message: 'Błąd podczas usuwania zdjęcia' };
     }
 }

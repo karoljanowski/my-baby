@@ -26,20 +26,20 @@ const SignUpForm = () => {
 
     return (
         <form action={formAction} className="w-full flex flex-col gap-6">
-            <div className="flex flex-col gap-3 w-full">
-                <Label htmlFor="email">Adres e-mail</Label>
+            <div className="flex flex-col">
+                <Label className="mb-3" htmlFor="email">Adres e-mail</Label>
                 <Input name="email" type="email" placeholder="Wprowadź adres e-mail" defaultValue={state?.formData?.email} />
-                {state?.errors?.email && <p className="text-red-500 text-sm">{state.errors.email}</p>}
+                {state?.errors?.email && <p className="text-red-500 text-sm mt-1">{state.errors.email}</p>}
             </div>
-            <div className="flex flex-col gap-3 w-full">
-                <Label htmlFor="password">Hasło</Label>
+            <div className="flex flex-col">
+                <Label className="mb-3" htmlFor="password">Hasło</Label>
                 <PasswordInput name="password" placeholder="Wprowadź hasło" />
-                {state?.errors?.password && <p className="text-red-500 text-sm">{state.errors.password}</p>}
+                {state?.errors?.password && <p className="text-red-500 text-sm mt-1">{state.errors.password}</p>}
             </div>
-            <div className="flex flex-col gap-3 w-full">
-                <Label htmlFor="confirmPassword">Powtórz hasło</Label>
+            <div className="flex flex-col">
+                <Label className="mb-3" htmlFor="confirmPassword">Powtórz hasło</Label>
                 <PasswordInput name="confirmPassword" placeholder="Wprowadź hasło" />
-                {state?.errors?.confirmPassword && <p className="text-red-500 text-sm">{state.errors.confirmPassword}</p>}
+                {state?.errors?.confirmPassword && <p className="text-red-500 text-sm mt-1">{state.errors.confirmPassword}</p>}
             </div>
             <div className="flex flex-col gap-4 w-full mt-2">
                 <Button type="submit" className="w-full md:w-3/4" disabled={isPending}>Zarejestruj się</Button>

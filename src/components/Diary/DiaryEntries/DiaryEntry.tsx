@@ -1,7 +1,7 @@
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { TQuestion } from "@/lib/questions";    
-import { EntryDataWithFiles, Status } from "@/lib/types";
+import { EntryDataWithFiles, Status, StatusState } from "@/lib/types";
 import { saveEntry } from "@/server/diary";
 import { useState, useEffect, useTransition, useRef } from "react";
 import { useDebounce } from "@/lib/hooks";
@@ -16,7 +16,7 @@ type DiaryEntryProps = {
 
 const DiaryEntry = ({ question, entry, diaryId }: DiaryEntryProps) => {
     const [text, setText] = useState(entry?.text ?? "");
-    const [status, setStatus] = useState<Status>(Status.NO_CHANGES);
+    const [status, setStatus] = useState<Status>({ state: StatusState.NO_CHANGES });
     const debouncedText = useDebounce(text, 1000);
     const hasUserEditedRef = useRef(false);
 
@@ -26,12 +26,12 @@ const DiaryEntry = ({ question, entry, diaryId }: DiaryEntryProps) => {
         }
 
         const save = async () => {
-            setStatus(Status.SAVING);
+            setStatus({ state: StatusState.SAVING });
             const result = await saveEntry({ text: debouncedText, diaryId, entryKey: question.question_key });
             if (result.success) {
-                setStatus(Status.SAVED);
-            } else if (result.error) {
-                setStatus(Status.ERROR);
+                setStatus({ state: StatusState.SAVED });
+            } else {
+                setStatus({ state: StatusState.ERROR, message: result.message || 'Błąd podczas zapisywania' });
             }
         }
         save();

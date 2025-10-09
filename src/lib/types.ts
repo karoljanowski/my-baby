@@ -41,11 +41,16 @@ export type EntryDataWithFiles = Prisma.DiaryEntryGetPayload<{
     }
 }>
 
-export enum Status {
+export enum StatusState {
     NO_CHANGES,
     SAVING,
     SAVED,
     ERROR,
+}
+
+export type Status = {
+    state: StatusState;
+    message?: string;
 }
 
 // Discover Diary component

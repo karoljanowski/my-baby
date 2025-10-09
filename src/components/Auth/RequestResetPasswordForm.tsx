@@ -11,11 +11,11 @@ const RequestResetPasswordForm = () => {
 
     return (
         <form action={formAction} className="w-full flex flex-col gap-6">
-            <div className="flex flex-col gap-3 w-full">
-                <Label htmlFor="email">Adres e-mail</Label>
+            <div className="flex flex-col">
+                <Label className="mb-3" htmlFor="email">Adres e-mail</Label>
                 <Input name="email" type="email" placeholder="Wprowadź adres e-mail" />
-                {state?.error?.message && <p className="text-red-500 text-sm">{state.error.message}</p>}
-                {state?.message && state.success && <p className="text-green-500 text-sm">{state.message}</p>}
+                {state?.error?.message && <p className="text-red-500 text-sm mt-1">{state.error.message}</p>}
+                {state?.message && state.success && <p className="text-green-500 text-sm mt-1">{state.message}</p>}
             </div>
             <div className="flex flex-col gap-4 w-full mt-2">
                 <Button type="submit" className="w-full md:w-3/4" disabled={isPending}>Wyślij</Button>

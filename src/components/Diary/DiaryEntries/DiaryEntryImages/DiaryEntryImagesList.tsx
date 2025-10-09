@@ -1,4 +1,4 @@
-import { Status } from "@/lib/types";
+import { Status, StatusState } from "@/lib/types";
 import { deleteEntryImage } from "@/server/diary";
 import { DiaryEntryFile } from "../../../../../generated/prisma";
 import { Loader2, X } from "lucide-react";
@@ -18,14 +18,14 @@ const DiaryEntryImagesList = ({ images, setImages, uploadingCount, setStatus, di
     const router = useRouter();
 
     const handleDelete = async (id: string) => {
-        setStatus(Status.SAVING);
+        setStatus({ state: StatusState.SAVING });
         const result = await deleteEntryImage(id, diaryId, entryKey);
         if (result.success && result.files) {
             setImages(result.files);
-            setStatus(Status.SAVED);
+            setStatus({ state: StatusState.SAVED });
             router.refresh();
-        } else if (result.error) {
-            setStatus(Status.ERROR);
+        } else {
+            setStatus({ state: StatusState.ERROR, message: result.message || 'Błąd podczas usuwania zdjęcia' });
         }
     }
 
