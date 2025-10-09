@@ -32,7 +32,7 @@ const SignInForm = () => {
                 <Label htmlFor="password">Hasło</Label>
                 <PasswordInput name="password" placeholder="Wprowadź hasło" />
                 {state?.errors?.password && <p className="text-red-500 text-sm">{state.errors.password}</p>}
-                <Link className="text-sm self-end hover:underline" href="/odzyskiwanie-hasla">Nie pamiętasz hasła?</Link>
+                <Link className="text-sm self-end hover:underline" href="/resetowanie-hasla">Nie pamiętasz hasła?</Link>
             </div>
             <div className="flex flex-col gap-4 w-full mt-2">
                 <Button type="submit" className="w-full md:w-3/4" disabled={isPending}>Zaloguj się</Button>

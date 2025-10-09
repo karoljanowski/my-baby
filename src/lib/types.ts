@@ -14,6 +14,16 @@ export type AuthActionState = {
     };
 } | null;
 
+export type ResetPasswordActionState = {
+    success?: boolean;
+    errors?: {
+        email?: string;
+        password?: string;
+        confirmPassword?: string;
+        general?: string;
+    }
+} | null;
+
 // Diary form
 export type CreateDiaryActionState = {
     success?: boolean;

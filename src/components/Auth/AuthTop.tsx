@@ -5,13 +5,14 @@ import { Button } from "@/components/ui/button";
 type AuthTopProps = {
     title: React.ReactNode;
     description: string;
+    backLink?: string;
 }
 
-const AuthTop = ({ title, description }: AuthTopProps) => {
+const AuthTop = ({ title, description, backLink="/" }: AuthTopProps) => {
     return (
         <div className="flex flex-col w-full items-start mb-16">
             <Button variant="ghost" size="ghost" asChild className="mb-8">
-                <Link href="/">
+                <Link href={backLink} >
                     <ArrowLeftIcon strokeWidth={1} className="size-6" /> Powrót
                 </Link>
             </Button>

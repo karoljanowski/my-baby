@@ -1,10 +1,10 @@
 'use server';
 
 import { prisma } from "@/lib/prisma";
-import { createSession, verifySession } from "./session";
+import { createSession, deleteSession } from "./session";
 import bcrypt from "bcrypt";
 import type { AuthActionState } from "@/lib/types";
-import { cache } from "react";
+import { redirect } from "next/navigation";
 
 const signIn = async (prevState: AuthActionState, formData: FormData) => {
     const email = formData.get("email") as string;
@@ -119,4 +119,9 @@ const signUp = async (prevState: AuthActionState, formData: FormData) => {
     return { success: true };
 }
 
-export { signIn, signUp };
+const signOut = async () => {
+    await deleteSession();
+    redirect('/');
+}
+
+export { signIn, signUp, signOut };
