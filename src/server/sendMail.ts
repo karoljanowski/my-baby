@@ -50,11 +50,33 @@ export const sendMail = async (prevState: SendMailActionState, formData: FormDat
     }
 
     try {
+        // Mail do właściciela strony
         await resend.emails.send({
             from: fromEmail,
             to: toEmail,
+            replyTo: email,
             subject: "Formularz kontaktowy - My Baby",
-            html: `<p>Imię: ${name}</p><p>Email: ${email}</p><p>Wiadomość: ${message}</p>`,
+            html: `
+                <h2>Ktoś skorzystał z formularza na twojej stronie!</h2>
+                <p><strong>Imię:</strong> ${name}</p>
+                <p><strong>Email:</strong> ${email}</p>
+                <p><strong>Wiadomość:</strong> ${message}</p>
+                <hr/>
+                <p><em>Odpowiadając na tego maila odpowiesz do klienta</em></p>
+            `,
+        });
+
+        // Mail potwierdzający dla klienta
+        await resend.emails.send({
+            from: fromEmail,
+            to: email,
+            subject: "Dziękujemy za kontakt - My Baby",
+            html: `
+                <h2>Dziękujemy za kontakt!</h2>
+                <p>Witaj ${name},</p>
+                <p>Dziękujemy za przesłanie formularza kontaktowego. Twoja wiadomość została dostarczona i wkrótce się z Tobą skontaktujemy.</p>
+                <p>Pozdrawiamy,<br/>Zespół My Baby</p>
+            `,
         });
 
         return {
