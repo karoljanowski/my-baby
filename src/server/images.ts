@@ -3,6 +3,7 @@
 import { del, put } from '@vercel/blob';
 import { v4 as uuidv4 } from 'uuid';
 import { verifySession } from './session';
+import sharp from 'sharp';
 
 export const uploadImageToBlob = async (file: File): Promise<string> => {
     const userId = await verifySession();
@@ -12,8 +13,20 @@ export const uploadImageToBlob = async (file: File): Promise<string> => {
     }
 
     try {
-        const blob = await put(uuidv4(), file, {
+        const arrayBuffer = await file.arrayBuffer();
+        const buffer = Buffer.from(arrayBuffer);
+
+        const resizedImageBuffer = await sharp(buffer)
+            .resize(200, 200, {
+                fit: 'cover',
+                position: 'center',
+            })
+            .png({ quality: 80 })
+            .toBuffer();
+
+        const blob = await put(uuidv4(), resizedImageBuffer, {
             access: 'public',
+            contentType: 'image/png',
         });
         return blob.url;
     } catch (error) {
