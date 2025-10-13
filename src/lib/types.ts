@@ -41,6 +41,10 @@ export type EntryDataWithFiles = Prisma.DiaryEntryGetPayload<{
     }
 }>
 
+export type EntryWithQuestionTitle = EntryDataWithFiles & {
+    question_title: string;
+}
+
 export enum StatusState {
     NO_CHANGES,
     SAVING,
