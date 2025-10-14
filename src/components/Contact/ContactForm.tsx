@@ -17,7 +17,7 @@ const ContactForm = () => {
         } else if (state?.errors?.general) {
             toast.error(state.errors.general);
         }
-    }, [state?.success, state?.errors?.general]);
+    }, [state]);
     return (
         <form action={formAction} className="w-full flex flex-col gap-6">
             <div className="flex flex-col">

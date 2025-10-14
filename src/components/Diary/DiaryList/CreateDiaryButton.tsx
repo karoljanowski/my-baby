@@ -21,7 +21,7 @@ const CreateDiaryButton = () => {
             router.refresh();
             setIsOpen(false);
         }
-    }, [state?.success, router]);
+    }, [state, router]);
 
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>

@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { DiaryEntryFile } from "../../../../../generated/prisma";
 import { saveEntryImages } from "@/server/diary";
 import { Status, StatusState } from "@/lib/types";
@@ -18,13 +17,8 @@ const MAX_FILE_SIZE = 4 * 1024 * 1024;
 const MAX_TOTAL_SIZE = 10 * 1024 * 1024;
 
 const DiaryEntryImages = ({ initialImages, entryKey, diaryId, setStatus, status }: DiaryEntryImagesProps) => {
-    const router = useRouter();
     const [images, setImages] = useState(initialImages);
     const [uploadingCount, setUploadingCount] = useState(0);
-
-    useEffect(() => {
-        setImages(initialImages);
-    }, [initialImages]);
 
     const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const files = e.target.files;
@@ -61,7 +55,6 @@ const DiaryEntryImages = ({ initialImages, entryKey, diaryId, setStatus, status 
                 setImages(result.files);
                 setUploadingCount(0);
                 setStatus({ state: StatusState.SAVED });
-                router.refresh();
             } else {
                 setStatus({ state: StatusState.ERROR, message: result.message || 'Błąd podczas przesyłania zdjęć' });
                 setUploadingCount(0);

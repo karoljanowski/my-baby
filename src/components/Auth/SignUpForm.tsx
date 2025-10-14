@@ -22,7 +22,7 @@ const SignUpForm = () => {
         } else if (state?.errors?.general) {
             toast.error(state.errors.general);
         }
-    }, [state?.success, router, state?.errors?.general]);
+    }, [state, router]);
 
     return (
         <form action={formAction} className="w-full flex flex-col gap-6">

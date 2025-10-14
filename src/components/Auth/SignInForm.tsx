@@ -19,7 +19,7 @@ const SignInForm = () => {
             toast.success("Pomyślnie zalogowano");
             router.push("/dziennik");
         }
-    }, [state?.success, router]);
+    }, [state, router]);
 
     return (
         <form action={formAction} className="w-full flex flex-col gap-6">
