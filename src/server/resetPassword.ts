@@ -71,6 +71,10 @@ export const resetPassword = async (prevState: ResetPasswordActionState, formDat
         errors.password = "Hasło jest wymagane";
     }
 
+    if (password.length < 8) {
+        errors.password = "Hasło musi mieć co najmniej 8 znaków";
+    }
+
     if (!confirmPassword) {
         errors.confirmPassword = "Potwierdzenie hasła jest wymagane";
     }
