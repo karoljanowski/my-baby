@@ -7,10 +7,17 @@ import { ArrowLeftIcon } from "lucide-react";
 import { ArrowRightIcon } from "lucide-react";
 
 const DiscoverDiaryList = () => {
-    const scroll = (direction: 'left' | 'right') => {
+    const scroll = (direction: 'left' | 'right', e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+        e.stopPropagation();
+        
         if (scrollContainerRef.current) {
-            const scrollAmount = scrollContainerRef.current.clientWidth * 0.9;
-            scrollContainerRef.current.scrollBy({
+            const container = scrollContainerRef.current;
+            const itemWidth = container.querySelector('div')?.offsetWidth || 0;
+            const gap = 16;
+            const scrollAmount = itemWidth + gap;
+            
+            container.scrollBy({
                 left: direction === 'left' ? -scrollAmount : scrollAmount,
                 behavior: 'smooth'
             });
@@ -53,15 +60,15 @@ const DiscoverDiaryList = () => {
             {/* Mobile navigation buttons */}
             <div className="flex gap-4 md:hidden">
                 <button
-                    onClick={() => scroll('left')}
-                    className="p-3 rounded-full border border-green"
+                    onClick={(e) => scroll('left', e)}
+                    className="p-3 rounded-full border border-green touch-none"
                     aria-label="Poprzednia kategoria"
                 >
                     <ArrowLeftIcon className="w-6 h-6 text-brown" />
                 </button>
                 <button
-                    onClick={() => scroll('right')}
-                    className="p-3 rounded-full border border-green"
+                    onClick={(e) => scroll('right', e)}
+                    className="p-3 rounded-full border border-green touch-none"
                     aria-label="Następna kategoria"
                 >
                     <ArrowRightIcon className="w-6 h-6 text-brown" />
