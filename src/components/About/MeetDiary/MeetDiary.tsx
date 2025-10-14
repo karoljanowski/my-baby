@@ -12,7 +12,7 @@ const MeetDiary = () => {
                     <h2 className="text-[32px] md:text-[40px] lg:text-[48px] leading-[120%] mb-16 text-dark -tracking-[0.06em] max-w-[550px]">Poznaj nasz wyjątkowy <span className="text-secondary font-secondary">dziennik</span> dla dzieci</h2>
                     <p className="text-base leading-[150%] font-light mb-8 max-w-[700px]">Nasz dziennik to idealne narzędzie, które pozwala rodzicom dokumentować najważniejsze chwile w życiu ich dziecka. Dzięki możliwości dodawania zdjęć i osobistych notatek, staje się on nie tylko pamiątką, ale także źródłem radości w przyszłości.</p>
                     <Button asChild className="w-fit">
-                        <Link href="/dziennik">
+                        <Link href="/o-nas">
                             Dowiedz się więcej
                         </Link>
                     </Button>

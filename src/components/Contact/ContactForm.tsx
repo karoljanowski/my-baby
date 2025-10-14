@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { useActionState, useEffect, useState, useTransition } from "react";
+import { useActionState, useEffect } from "react";
 import { toast } from "sonner";
 import { sendMail } from "@/server/sendMail";
 
@@ -17,7 +17,7 @@ const ContactForm = () => {
         } else if (state?.errors?.general) {
             toast.error(state.errors.general);
         }
-    }, [state?.success]);
+    }, [state?.success, state?.errors?.general]);
     return (
         <form action={formAction} className="w-full flex flex-col gap-6">
             <div className="flex flex-col">

@@ -43,7 +43,7 @@ export const createDiary = async (prevState: CreateDiaryActionState, formData: F
         });
 
         return {success: true};
-    } catch (error) {
+    } catch {
         return { error: { message: "Wystąpił błąd podczas tworzenia nowego dziennika" }, formData: { name } };
     }
 };
@@ -91,8 +91,7 @@ export const deleteDiary = async (id: string) => {
         }
 
         return { success: true };
-    } catch (error) {
-        console.error('Error deleting diary:', error);
+    } catch {
         return { error: { message: "Wystąpił błąd podczas usuwania dziennika" } };
     }   
 };

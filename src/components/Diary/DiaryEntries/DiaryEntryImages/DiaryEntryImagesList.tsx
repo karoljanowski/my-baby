@@ -11,15 +11,14 @@ type DiaryEntryImagesListProps = {
     uploadingCount: number;
     setStatus: (status: Status) => void;
     diaryId: string;
-    entryKey: string;
 }
 
-const DiaryEntryImagesList = ({ images, setImages, uploadingCount, setStatus, diaryId, entryKey }: DiaryEntryImagesListProps) => {
+const DiaryEntryImagesList = ({ images, setImages, uploadingCount, setStatus, diaryId }: DiaryEntryImagesListProps) => {
     const router = useRouter();
 
     const handleDelete = async (id: string) => {
         setStatus({ state: StatusState.SAVING });
-        const result = await deleteEntryImage(id, diaryId, entryKey);
+        const result = await deleteEntryImage(id, diaryId);
         if (result.success && result.files) {
             setImages(result.files);
             setStatus({ state: StatusState.SAVED });

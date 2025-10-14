@@ -3,7 +3,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { TQuestion } from "@/lib/questions";    
 import { EntryDataWithFiles, Status, StatusState } from "@/lib/types";
 import { saveEntry } from "@/server/diary";
-import { useState, useEffect, useTransition, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useDebounce } from "@/lib/hooks";
 import DiaryEntryStatusInfo from "@/components/Diary/DiaryEntries/DiaryEntryStatusInfo";
 import DiaryEntryImages from "@/components/Diary/DiaryEntries/DiaryEntryImages/DiaryEntryImages";

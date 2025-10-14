@@ -1,6 +1,6 @@
 "use client";
 import { Menu, X } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 
 const MobileMenu = ({ menuItems }: { menuItems: { label: string, href: string }[] }) => {

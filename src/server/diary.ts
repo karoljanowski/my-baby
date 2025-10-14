@@ -49,7 +49,7 @@ export const saveEntry = async (data: { text: string, diaryId: string, entryKey:
         revalidatePath(`/dziennik/${diaryId}`);
         
         return { success: true };
-    } catch (error) {
+    } catch {
         return { success: false, message: 'Błąd podczas zapisywania wpisu' };
     }
 };
@@ -110,12 +110,12 @@ export const saveEntryImages = async (data: { images: File[], diaryId: string, e
         revalidatePath(`/dziennik/${diaryId}`);
 
         return { success: true, files: updatedFiles };
-    } catch (error) {
+    } catch {
         return { success: false, message: 'Błąd podczas przesyłania zdjęć' };
     }
 }
 
-export const deleteEntryImage = async (id: string, diaryId: string, entryKey: string) => {
+export const deleteEntryImage = async (id: string, diaryId: string) => {
     const userId = await verifySession();
 
     if (!userId) {
@@ -144,7 +144,7 @@ export const deleteEntryImage = async (id: string, diaryId: string, entryKey: st
         revalidatePath(`/dziennik/${diaryId}`);
 
         return { success: true, files: updatedFiles };
-    } catch (error) {
+    } catch {
         return { success: false, message: 'Błąd podczas usuwania zdjęcia' };
     }
 }

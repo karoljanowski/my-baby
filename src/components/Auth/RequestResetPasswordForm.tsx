@@ -1,6 +1,6 @@
 'use client';
 
-import {useActionState, useEffect} from "react";
+import {useActionState} from "react";
 import { requestResetPassword } from "@/server/resetPassword";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";

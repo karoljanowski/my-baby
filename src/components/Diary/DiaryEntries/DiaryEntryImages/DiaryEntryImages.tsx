@@ -80,7 +80,6 @@ const DiaryEntryImages = ({ initialImages, entryKey, diaryId, setStatus, status 
                     uploadingCount={uploadingCount}
                     setStatus={setStatus} 
                     diaryId={diaryId}
-                    entryKey={entryKey}
                 />
             )}
             <DiaryEntryImagesInput disabled={status.state === StatusState.SAVING} hasImages={images.length > 0 || uploadingCount > 0} entryKey={entryKey} handleChange={handleChange} />

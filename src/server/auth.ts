@@ -106,7 +106,7 @@ const signUp = async (prevState: AuthActionState, formData: FormData) => {
         await prisma.user.create({
             data: { email: email, password: hashedPassword },
         });
-    } catch (error) {
+    } catch {
         return { 
             success: false,
             errors: { 

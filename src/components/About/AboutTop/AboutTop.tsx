@@ -1,5 +1,4 @@
 import { Badge } from "@/components/ui/badge";
-import BorderImage from "@/components/BorderImage";
 
 const AboutTop = () => {
     return (

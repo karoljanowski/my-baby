@@ -17,7 +17,7 @@ const ResetPasswordForm = ({ token }: { token: string }) => {
             toast.success("Hasło zostało zresetowane");
             router.push("/logowanie");
         }
-    }, [state?.success]);
+    }, [state?.success, router]);
 
     return (
         <form action={formAction} className="w-full flex flex-col gap-6">

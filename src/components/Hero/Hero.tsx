@@ -25,7 +25,7 @@ const Hero = () => {
                         </div>
                     </div>
                     <div className="flex justify-center lg:justify-end lg:pt-8">
-                        <BorderImage src="/hero/hero.png" alt="Stwórz wyjątkowy dziennik wspomnień dla swojego dziecka" width={584} height={674} containerClassName="w-[335px] md:w-[400px] xl:w-[584px] aspect-[584/674]" className="object-cover object-top border-[20px] xl:border-[30px] xl:border-b-0" />
+                        <BorderImage src="/images/hero.png" alt="Stwórz wyjątkowy dziennik wspomnień dla swojego dziecka" width={584} height={674} containerClassName="w-[335px] md:w-[400px] xl:w-[584px] aspect-[584/674]" className="object-cover object-top border-[20px] xl:border-[30px] xl:border-b-0" />
                     </div>
                 </div>
                 <HeroDecorations />

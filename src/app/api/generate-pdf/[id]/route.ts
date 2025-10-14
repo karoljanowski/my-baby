@@ -1,7 +1,7 @@
 import { verifySession } from "@/server/session";
 import { NextRequest, NextResponse } from "next/server";
 import { renderToStream } from '@react-pdf/renderer'
-import { createElement, ReactElement } from "react";
+import { createElement } from "react";
 import { getDiaryById } from "@/server/diary";
 import PdfDiary from "@/components/PdfDiary/PdfDiary";
 import { readFileSync } from "fs";

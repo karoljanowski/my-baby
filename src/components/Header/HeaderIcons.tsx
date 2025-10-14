@@ -23,7 +23,7 @@ const HeaderIcons = ({ isLoggedIn }: HeaderIconsProps) => {
                     <LogOut className="text-dark" />
                 </button>
             ) : (
-                <Link href="/logowanie">
+                <Link href="/dziennik">
                     <User className="text-dark" />
                 </Link>
             )}

@@ -5,7 +5,7 @@ import RequestResetPasswordForm from "@/components/Auth/RequestResetPasswordForm
 
 const RequestResetPasswordPage = () => {
     return (
-        <GeneralContainer image="/hero/hero.png" alt="Zaloguj się i zacznij tworzyć dziennik" containerClassName="bg-white" decorations={<AuthDecorations />}>
+        <GeneralContainer image="/images/login.png" alt="Zaloguj się i zacznij tworzyć dziennik" containerClassName="bg-white" decorations={<AuthDecorations />}>
             <AuthTop title="Wyślij prośbę o resetowanie hasła" description="Wpisz swój adres e-mail, aby otrzymać link do resetowania hasła" backLink="/logowanie" />
             <RequestResetPasswordForm />
         </GeneralContainer>
