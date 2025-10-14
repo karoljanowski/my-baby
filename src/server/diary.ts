@@ -87,13 +87,11 @@ export const saveEntryImages = async (data: { images: File[], diaryId: string, e
     }
 
     try {
-        const diaryEntry = await prisma.diaryEntry.findUnique({
+        const diaryEntry = await prisma.diaryEntry.upsert({
             where: { diaryId_entryKey: { diaryId, entryKey } },
+            update: {},
+            create: { text: '', diaryId, entryKey },
         });
-
-        if (!diaryEntry) {
-            return { success: false, message: 'Wpis nie istnieje' };
-        }
 
         const imagesUrls = await Promise.all(images.map(async (image) => {
             return await uploadImageToBlob(image);
