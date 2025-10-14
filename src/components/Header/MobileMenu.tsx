@@ -34,7 +34,7 @@ const MobileMenu = ({ menuItems }: { menuItems: { label: string, href: string }[
             )}
 
             {/* Menu Panel */}
-            <div className={`fixed top-0 left-0 w-4/5 max-w-sm h-[100svh] bg-background z-50 shadow-2xl transition-transform duration-300 ease-in-out ${
+            <div className={`fixed top-0 left-0 w-4/5 max-w-sm h-screen bg-background z-50 shadow-2xl transition-transform duration-300 ease-in-out ${
                 isOpen ? 'translate-x-0' : '-translate-x-full'
             }`}>
                 <div className="flex flex-col h-full">
